@@ -11,7 +11,8 @@ services:
       - ./data:/data
     networks:
       - "redisnet"
-    # command: redis-server --appendonly yes
+    command:
+      --requirepass "he*a5792aD!2" #这一行是设置密码
 
 networks: 
   redisnet: 
