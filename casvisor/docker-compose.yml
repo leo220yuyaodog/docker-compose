@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  casvisor:
+    restart: always
+    image: casbin/casvisor:latest
+    entrypoint: /bin/sh -c './server --createDatabase=true'
+    ports:
+      - "19000:19000"
+    environment:
+      RUNNING_IN_DOCKER: "true"
+    volumes:
+      - ./conf:/conf/
+  guacd:
+    image: guacamole/guacd:latest
+    environment:
+      GUACD_LOG_LEVEL: debug
+    volumes:
+      - ./data/guacd:/usr/local/casvisor/data
+    ports:
+      - "4822:4822"
+    restart:
+      always
